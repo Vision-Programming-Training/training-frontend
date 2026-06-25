@@ -1,7 +1,7 @@
-// 描画（DOM 操作）層。
-// 画面要素を取得し、データを受け取って HTML を組み立てるだけ。
-// 通信（api.js）やカートの状態（cart.js）には依存しない。
-// ボタンが押されたときの処理は、呼び出し側から「ハンドラ」として渡してもらう。
+// 描画（DOM 操作）層
+// 画面要素を取得し、データを受け取って HTML を組み立てるだけ
+// 通信（api.js）やカートの状態（cart.js）には依存しない
+// ボタンが押されたときの処理は、呼び出し側から「ハンドラ」として渡してもらう
 
 // ---- 画面要素 ----
 const productsEl = document.getElementById("products");
@@ -11,24 +11,24 @@ const checkoutEl = document.getElementById("checkout");
 const resultEl = document.getElementById("result");
 const apiBaseEl = document.getElementById("api-base");
 
-// 金額を ¥1,234 の形式に整える。
+// 金額を ¥1,234 の形式に整える
 export function yen(value) {
   return `¥${Number(value).toLocaleString("ja-JP")}`;
 }
 
-// HTML に値を埋め込む前のエスケープ（XSS 対策）。
+// HTML に値を埋め込む前のエスケープ（XSS 対策）
 export function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, (c) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
 }
 
-// 接続先サーバーの URL を画面に表示する。
+// 接続先サーバーの URL を画面に表示する
 export function setApiBase(url) {
   apiBaseEl.textContent = url;
 }
 
-// 商品一覧を描画する。onAdd(product) は「カートに追加」ボタンの押下処理。
+// 商品一覧を描画する（onAdd(product) は「カートに追加」ボタンの押下処理）
 export function renderProducts(products, onAdd) {
   if (products.length === 0) {
     productsEl.innerHTML = `<p class="empty">商品がありません。</p>`;
@@ -57,12 +57,12 @@ export function renderProducts(products, onAdd) {
   }
 }
 
-// 商品一覧の取得に失敗したときの表示。
+// 商品一覧の取得に失敗したときの表示
 export function showProductsError(message) {
   productsEl.innerHTML = `<div class="message error">${escapeHtml(message)}\nサーバーが起動しているか、config.js の API_BASE_URL を確認してください。</div>`;
 }
 
-// カートを描画する。onRemove(productId) は「削除」ボタンの押下処理。
+// カートを描画する（onRemove(productId) は「削除」ボタンの押下処理）
 export function renderCart(items, subtotal, onRemove) {
   resultEl.innerHTML = "";
 
@@ -93,12 +93,12 @@ export function renderCart(items, subtotal, onRemove) {
     cartEl.appendChild(row);
   }
 
-  // 税抜小計の目安。確定金額（税込・クーポン適用後）はサーバーが計算して返す。
+  // 税抜小計の目安（確定金額は税込・クーポン適用後でサーバーが計算して返す）
   cartTotalEl.textContent = `税抜小計（目安）: ${yen(subtotal)}`;
   checkoutEl.style.display = "block";
 }
 
-// 注文結果などのメッセージを表示する。
+// 注文結果などのメッセージを表示する
 export function showMessage(text, type) {
   resultEl.innerHTML = "";
   const div = document.createElement("div");

@@ -1,10 +1,10 @@
-// API 呼び出し層。ここがクライアントとサーバーの境界。
-// この fetch の行こそが「ブラウザ」と「サーバー」が別物で、HTTP で通信していることを表す。
-// DOM やカートの状態には一切触れない（サーバーとの通信だけに責任を持つ）。
+// API 呼び出し層（クライアントとサーバーの境界）
+// この fetch の行こそが「ブラウザ」と「サーバー」が別物で、HTTP で通信していることを表す
+// DOM やカートの状態には一切触れない（サーバーとの通信だけに責任を持つ）
 
 import { API_BASE_URL } from "./config.js";
 
-// 商品一覧を取得する。
+// 商品一覧を取得する
 export async function fetchProducts() {
   const res = await fetch(`${API_BASE_URL}/api/products`);
   if (!res.ok) {
@@ -13,7 +13,7 @@ export async function fetchProducts() {
   return res.json();
 }
 
-// 注文を作成する。失敗時はサーバーが返したエラーメッセージを投げる。
+// 注文を作成する（失敗時はサーバーが返したエラーメッセージを投げる）
 export async function postOrder(items, couponCode) {
   const body = { items };
   if (couponCode) {
