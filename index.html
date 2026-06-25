@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision 市場</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <h1>Vision 市場</h1>
+  <p class="muted">
+    接続先サーバー: <code id="api-base"></code>
+  </p>
+
+  <div class="layout">
+    <section>
+      <h2>商品一覧</h2>
+      <div id="products"><p class="empty">読み込み中...</p></div>
+    </section>
+
+    <section>
+      <h2>カート</h2>
+      <div id="cart"><p class="empty">カートは空です。</p></div>
+      <div class="total" id="cart-total"></div>
+
+      <div class="card" id="checkout" style="display:none;">
+        <label>
+          クーポンコード（任意）<br />
+          <input type="text" id="coupon" placeholder="例: WELCOME500 / SALE10" />
+        </label>
+        <p>
+          <button class="primary" id="order-btn">この内容で注文する</button>
+        </p>
+        <div id="result"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ES モジュール（main.js が config / api / cart / ui を import するので、読み込むのは main.js だけ） -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
