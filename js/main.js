@@ -54,15 +54,16 @@ async function submitOrder() {
 
   try {
     const order = await postOrder(items, couponEl.value.trim());
-    ui.showMessage(
-      `注文が完了しました！\n注文番号: ${order.id}\nステータス: ${order.status}\nお支払い金額（税込）: ${ui.yen(order.totalAmount)}`,
-      "success"
-    );
     // 1 本道なのでカートを空にして、最新の在庫を取り直す
     cart.clearCart();
     couponEl.value = "";
     refreshCart();
     await loadProducts();
+    // 結果メッセージはカート再描画（resultEl をクリアする）の後に出す
+    ui.showMessage(
+      `注文が完了しました！\n注文番号: ${order.id}\nステータス: ${order.status}\nお支払い金額（税込）: ${ui.yen(order.totalAmount)}`,
+      "success"
+    );
   } catch (err) {
     ui.showMessage(err.message, "error");
   } finally {
