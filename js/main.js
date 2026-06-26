@@ -3,7 +3,7 @@
 // 「ボタンが押されたら何をするか」をここで決め、ui.js にハンドラとして渡す
 
 import { API_BASE_URL } from "./config.js";
-import { fetchProducts, postOrder } from "./api.js";
+import { fetchProducts, fetchCoupons, postOrder } from "./api.js";
 import * as cart from "./cart.js";
 import * as ui from "./ui.js";
 
@@ -43,6 +43,16 @@ async function loadProducts() {
   }
 }
 
+// 使えるクーポン一覧を読み込んで描画する
+async function loadCoupons() {
+  try {
+    const coupons = await fetchCoupons();
+    ui.renderCoupons(coupons);
+  } catch (err) {
+    ui.showCouponsError(err.message);
+  }
+}
+
 // 注文を確定する
 async function submitOrder() {
   const items = cart.getCartItems().map(({ product, quantity }) => ({
@@ -75,4 +85,5 @@ async function submitOrder() {
 orderBtn.addEventListener("click", submitOrder);
 
 loadProducts();
+loadCoupons();
 refreshCart();

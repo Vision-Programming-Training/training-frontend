@@ -13,6 +13,15 @@ export async function fetchProducts() {
   return res.json();
 }
 
+// 利用できるクーポン一覧を取得する
+export async function fetchCoupons() {
+  const res = await fetch(`${API_BASE_URL}/api/coupons`);
+  if (!res.ok) {
+    throw new Error(`クーポンの取得に失敗しました (HTTP ${res.status})`);
+  }
+  return res.json();
+}
+
 // 注文を作成する（失敗時はサーバーが返したエラーメッセージを投げる）
 export async function postOrder(items, couponCode) {
   const body = { items };

@@ -9,6 +9,7 @@ const cartEl = document.getElementById("cart");
 const cartTotalEl = document.getElementById("cart-total");
 const checkoutEl = document.getElementById("checkout");
 const resultEl = document.getElementById("result");
+const couponsEl = document.getElementById("coupons");
 const apiBaseEl = document.getElementById("api-base");
 
 // 金額を ¥1,234 の形式に整える
@@ -60,6 +61,38 @@ export function renderProducts(products, onAdd) {
 // 商品一覧の取得に失敗したときの表示
 export function showProductsError(message) {
   productsEl.innerHTML = `<div class="message error">${escapeHtml(message)}\nサーバーが起動しているか、config.js の API_BASE_URL を確認してください。</div>`;
+}
+
+// クーポンの割引内容を「¥500 引き」「10% 引き」のような文言にする
+export function describeDiscount(coupon) {
+  if (coupon.discountType === "Percentage") {
+    return `${Number(coupon.discountValue)}% 引き`;
+  }
+  return `${yen(coupon.discountValue)} 引き`;
+}
+
+// 使えるクーポン一覧を描画する
+export function renderCoupons(coupons) {
+  if (coupons.length === 0) {
+    couponsEl.innerHTML = `<p class="empty">利用できるクーポンはありません。</p>`;
+    return;
+  }
+
+  couponsEl.innerHTML = "";
+  for (const coupon of coupons) {
+    const card = document.createElement("div");
+    card.className = "card product";
+    card.innerHTML = `
+      <div><code>${escapeHtml(coupon.code)}</code></div>
+      <div class="muted">${escapeHtml(describeDiscount(coupon))}</div>
+    `;
+    couponsEl.appendChild(card);
+  }
+}
+
+// クーポン一覧の取得に失敗したときの表示
+export function showCouponsError(message) {
+  couponsEl.innerHTML = `<div class="message error">${escapeHtml(message)}</div>`;
 }
 
 // カートを描画する（onRemove(productId) は「削除」ボタンの押下処理）
