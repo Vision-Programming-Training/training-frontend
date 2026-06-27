@@ -1,0 +1,14 @@
+/* 注文履歴画面（orders.html）専用のスタイル */
+
+/* 注文カードのヘッダー（注文番号・ステータス・日時） */
+.order-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+
+/* ステータスバッジ */
+.badge { display: inline-block; font-size: .75rem; padding: .1rem .5rem; border-radius: 999px; margin-left: .5rem; }
+.badge-Confirmed { background: #e0edff; color: #1d4ed8; }
+.badge-Cancelled { background: #f0f0f0; color: #888; }
+
+/* 注文明細テーブル */
+.order-items { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.order-items th, .order-items td { padding: .3rem .4rem; border-bottom: 1px solid #eee; text-align: left; }
+.order-items .num { text-align: right; white-space: nowrap; }

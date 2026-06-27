@@ -1,3 +1,5 @@
+/* 全ページ共通のスタイル（レイアウト土台・ヘッダー / フッター・共通部品） */
+
 body { font-family: system-ui, sans-serif; max-width: 880px; margin: 0 auto; padding: 1rem; color: #222; }
 
 /* ヘッダー（ブランド + タブ型ナビ） */
@@ -22,30 +24,29 @@ body { font-family: system-ui, sans-serif; max-width: 880px; margin: 0 auto; pad
 /* 接続先サーバー表示（フッター） */
 .appfoot { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid #eee; color: #777; font-size: .8rem; }
 
+/* 見出し */
 h1 { font-size: 1.4rem; }
 h2 { font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: .3rem; margin-top: 2rem; }
-.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }
+
+/* 共通部品（カード・商品行・補足テキスト） */
 .card { border: 1px solid #ddd; border-radius: 8px; padding: .75rem; margin-bottom: .5rem; }
 .product { display: flex; justify-content: space-between; align-items: center; }
 .muted { color: #777; font-size: .85rem; }
+
+/* ボタン */
 button { cursor: pointer; border: 1px solid #ccc; background: #f7f7f7; border-radius: 6px; padding: .35rem .7rem; }
 button:hover:not(:disabled) { background: #eee; }
 button:disabled { cursor: not-allowed; opacity: .5; }
 button.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
 button.primary:hover:not(:disabled) { background: #1d4ed8; }
-.cart-item { display: flex; justify-content: space-between; align-items: center; padding: .35rem 0; border-bottom: 1px dashed #eee; }
-.total { font-weight: bold; font-size: 1.1rem; text-align: right; margin-top: .5rem; }
+
+/* 入力欄 */
 input[type="text"], input[type="number"] { padding: .35rem; border: 1px solid #ccc; border-radius: 6px; }
-.admin-controls { display: flex; gap: .5rem; align-items: center; }
-.admin-controls input[type="number"] { width: 7rem; }
-.order-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
-.badge { display: inline-block; font-size: .75rem; padding: .1rem .5rem; border-radius: 999px; margin-left: .5rem; }
-.badge-Confirmed { background: #e0edff; color: #1d4ed8; }
-.badge-Cancelled { background: #f0f0f0; color: #888; }
-.order-items { width: 100%; border-collapse: collapse; font-size: .9rem; }
-.order-items th, .order-items td { padding: .3rem .4rem; border-bottom: 1px solid #eee; text-align: left; }
-.order-items .num { text-align: right; white-space: nowrap; }
+
+/* 合計金額表示（ショップのカート・注文履歴の両方で使う） */
+.total { font-weight: bold; font-size: 1.1rem; text-align: right; margin-top: .5rem; }
+
+/* メッセージ・空表示 */
 .message { padding: .6rem; border-radius: 6px; margin-top: .5rem; white-space: pre-wrap; }
 .message.error { background: #fee; color: #b00; }
 .message.success { background: #efe; color: #070; }
