@@ -1,0 +1,8 @@
+/* ショップ画面（index.html）専用のスタイル */
+
+/* 商品一覧とカートの 2 カラムレイアウト */
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 700px) { .layout { grid-template-columns: 1fr; } }
+
+/* カート内の 1 行 */
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: .35rem 0; border-bottom: 1px dashed #eee; }

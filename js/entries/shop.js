@@ -1,11 +1,10 @@
-// 全体の組み立てと起動
-// api.js（通信）・cart.js（状態）・ui.js（描画）を呼び分けて、1 本道のアプリにする
-// 「ボタンが押されたら何をするか」をここで決め、ui.js にハンドラとして渡す
+// 店舗ページ（ホーム）の組み立てと起動
+// 「ボタンが押されたら何をするか」をここで決め、ui/render にハンドラとして渡す
 
-import { API_BASE_URL } from "./config.js";
-import { fetchProducts, fetchCoupons, postOrder } from "./api.js";
-import * as cart from "./cart.js";
-import * as ui from "./ui.js";
+import { API_BASE_URL } from "../core/config.js";
+import { fetchProducts, fetchCoupons, postOrder } from "../core/api.js";
+import * as cart from "../core/cart.js";
+import * as ui from "../ui/render.js";
 
 // main 固有の画面要素
 const couponEl = document.getElementById("coupon");

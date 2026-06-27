@@ -51,23 +51,32 @@ const API_BASE_URL = "http://localhost:5000";
 
 ## ファイル構成
 
-JavaScript は役割ごとに ES モジュールで分けています（読み込むのは `main.js` だけ。残りは import で連鎖的に読み込まれます）。
+JavaScript は役割ごとに ES モジュールで分けています。各 HTML が読み込むのは「その画面の入口（`js/entries/*.js`）」と「共通ヘッダー（`js/ui/components/topbar.js`）」だけで、残りは import で連鎖的に読み込まれます。
 
 ```
 training-frontend/
-├── index.html      画面の骨組み（js/main.js を type="module" で読み込む）
+├── index.html      店舗ページ（js/entries/shop.js を読み込む）
+├── orders.html     注文履歴ページ（js/entries/orders.js）
+├── admin.html      管理画面（js/entries/admin.js）
 ├── README.md
 ├── css/
 │   └── styles.css  見た目（スタイル）
 └── js/
-    ├── config.js   接続先サーバーのベース URL（ここだけ切り替える）
-    ├── api.js      fetch で API を叩く（クライアントとサーバーの境界）
-    ├── cart.js     カートの状態管理（DOM・通信に依存しない純粋なロジック）
-    ├── ui.js       描画（DOM 操作だけ）
-    └── main.js     全体の組み立てと起動（api / cart / ui を呼び分ける）
+    ├── entries/    各 HTML の入口（画面と 1 対 1。組み立てと起動・イベント結線）
+    │   ├── shop.js     店舗（商品一覧・カート・注文）
+    │   ├── orders.js   注文履歴
+    │   └── admin.js    管理（商品マスタ参照・価格変更）
+    ├── core/       DOM に依存しない土台
+    │   ├── config.js   接続先サーバーのベース URL（ここだけ切り替える）
+    │   ├── api.js      fetch で API を叩く（クライアントとサーバーの境界）
+    │   └── cart.js     カートの状態管理（純粋なロジック）
+    └── ui/         画面描画（DOM 操作）
+        ├── render.js     描画ヘルパ（yen / escapeHtml / 各種 render）
+        └── components/   複数ページで使い回す UI 部品
+            └── topbar.js  共通ヘッダーナビ（自分で <header> を差し込む）
 ```
 
-依存の向きは `main.js → api.js / cart.js / ui.js → config.js` の一方通行です。`cart.js` と `ui.js` は互いを知らず、つなぎ役の `main.js` がボタンの処理を「ハンドラ」として `ui.js` に渡します。これが**関心の分離**の形です。
+依存の向きは `entries/* → core/api・core/cart・ui/render → core/config` の一方通行です。`core/cart.js` と `ui/render.js` は互いを知らず、つなぎ役の `entries/*.js` がボタンの処理を「ハンドラ」として `ui/render.js` に渡します。これが**関心の分離**の形です。
 
 ## 使い方
 

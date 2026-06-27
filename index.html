@@ -4,13 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vision 市場</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/shop.css" />
 </head>
 <body>
-  <h1>Vision 市場</h1>
-  <p class="muted">
-    接続先サーバー: <code id="api-base"></code>
-  </p>
+  <h1>ショップ</h1>
 
   <div class="layout">
     <section>
@@ -42,7 +40,11 @@
     <div id="coupons"><p class="empty">読み込み中...</p></div>
   </section>
 
-  <!-- ES モジュール（main.js が config / api / cart / ui を import するので、読み込むのは main.js だけ） -->
-  <script type="module" src="js/main.js"></script>
+  <footer class="appfoot">接続先サーバー: <code id="api-base"></code></footer>
+
+  <!-- 共通ヘッダーナビ（自分で <header> を差し込む） -->
+  <script type="module" src="js/ui/components/topbar.js"></script>
+  <!-- ES モジュール -->
+  <script type="module" src="js/entries/shop.js"></script>
 </body>
 </html>

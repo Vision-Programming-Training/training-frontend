@@ -1,0 +1,5 @@
+/* 管理画面（admin.html）専用のスタイル */
+
+/* 価格更新の入力欄 + ボタンの並び */
+.admin-controls { display: flex; gap: .5rem; align-items: center; }
+.admin-controls input[type="number"] { width: 7rem; }

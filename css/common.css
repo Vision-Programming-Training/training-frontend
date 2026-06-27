@@ -1,0 +1,53 @@
+/* 全ページ共通のスタイル（レイアウト土台・ヘッダー / フッター・共通部品） */
+
+body { font-family: system-ui, sans-serif; max-width: 880px; margin: 0 auto; padding: 1rem; color: #222; }
+
+/* ヘッダー（ブランド + タブ型ナビ） */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .55rem .9rem; margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, .85); backdrop-filter: blur(8px);
+  border: 1px solid #e5e7eb; border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+  position: sticky; top: .5rem; z-index: 10;
+}
+.brand { font-weight: 700; font-size: 1.05rem; color: #111; text-decoration: none; white-space: nowrap; }
+.nav { display: flex; gap: .25rem; flex-wrap: wrap; }
+.nav-link {
+  text-decoration: none; color: #475569; font-size: .9rem;
+  padding: .4rem .85rem; border-radius: 999px;
+  transition: background .15s ease, color .15s ease;
+}
+.nav-link:hover { background: #f1f5f9; color: #1e293b; }
+.nav-link.active { background: #2563eb; color: #fff; }
+
+/* 接続先サーバー表示（フッター） */
+.appfoot { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid #eee; color: #777; font-size: .8rem; }
+
+/* 見出し */
+h1 { font-size: 1.4rem; }
+h2 { font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: .3rem; margin-top: 2rem; }
+
+/* 共通部品（カード・商品行・補足テキスト） */
+.card { border: 1px solid #ddd; border-radius: 8px; padding: .75rem; margin-bottom: .5rem; }
+.product { display: flex; justify-content: space-between; align-items: center; }
+.muted { color: #777; font-size: .85rem; }
+
+/* ボタン */
+button { cursor: pointer; border: 1px solid #ccc; background: #f7f7f7; border-radius: 6px; padding: .35rem .7rem; }
+button:hover:not(:disabled) { background: #eee; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+button.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+button.primary:hover:not(:disabled) { background: #1d4ed8; }
+
+/* 入力欄 */
+input[type="text"], input[type="number"] { padding: .35rem; border: 1px solid #ccc; border-radius: 6px; }
+
+/* 合計金額表示（ショップのカート・注文履歴の両方で使う） */
+.total { font-weight: bold; font-size: 1.1rem; text-align: right; margin-top: .5rem; }
+
+/* メッセージ・空表示 */
+.message { padding: .6rem; border-radius: 6px; margin-top: .5rem; white-space: pre-wrap; }
+.message.error { background: #fee; color: #b00; }
+.message.success { background: #efe; color: #070; }
+.empty { color: #999; }
