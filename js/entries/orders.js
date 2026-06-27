@@ -1,11 +1,11 @@
 // 注文履歴ページの組み立てと起動
-// 店舗ページ（main.js）・管理画面（admin.js）とは別の入口
+// 店舗ページ（shop.js）・管理画面（admin.js）とは別の入口
 // 確定済み注文を一覧し、各明細を「注文時点の単価」で表示する（A3 の論点を画面で確認できる）
-// 通信は api.js、汎用の描画ヘルパ（yen / escapeHtml / setApiBase）は ui.js を再利用する
+// 通信は core/api.js、汎用の描画ヘルパ（yen / escapeHtml / setApiBase）は ui/render.js を再利用する
 
-import { API_BASE_URL } from "./config.js";
-import { fetchOrders } from "./api.js";
-import { yen, escapeHtml, setApiBase } from "./ui.js";
+import { API_BASE_URL } from "../core/config.js";
+import { fetchOrders } from "../core/api.js";
+import { yen, escapeHtml, setApiBase } from "../ui/render.js";
 
 // orders 固有の画面要素
 const ordersEl = document.getElementById("orders");

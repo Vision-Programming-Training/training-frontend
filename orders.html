@@ -7,15 +7,6 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">🛒 Vision 市場</a>
-    <nav class="nav">
-      <a class="nav-link" href="index.html">店舗</a>
-      <a class="nav-link active" href="orders.html" aria-current="page">注文履歴</a>
-      <a class="nav-link" href="admin.html">管理</a>
-    </nav>
-  </header>
-
   <h1>注文履歴</h1>
 
   <section>
@@ -25,7 +16,9 @@
 
   <footer class="appfoot">接続先サーバー: <code id="api-base"></code></footer>
 
-  <!-- ES モジュール（orders.js が config / api / ui を import する） -->
-  <script type="module" src="js/orders.js"></script>
+  <!-- 共通ヘッダーナビ（自分で <header> を差し込む） -->
+  <script type="module" src="js/ui/components/topbar.js"></script>
+  <!-- ES モジュール（orders.js が core / ui を import する） -->
+  <script type="module" src="js/entries/orders.js"></script>
 </body>
 </html>
