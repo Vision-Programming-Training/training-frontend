@@ -2,7 +2,6 @@
 // 各 HTML から <script type="module" src="js/ui/components/topbar.js"> で読み込むと、
 // このモジュールが自分でヘッダーを <body> の先頭に差し込み、
 // 現在ページのタブを location から判定してハイライトする。
-// ページ固有のロジック（entries/shop.js / entries/admin.js / entries/orders.js）には依存しない。
 
 const BRAND = "🛒 Vision 市場";
 

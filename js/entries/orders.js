@@ -1,7 +1,5 @@
 // 注文履歴ページの組み立てと起動
-// 店舗ページ（shop.js）・管理画面（admin.js）とは別の入口
-// 確定済み注文を一覧し、各明細を「注文時点の単価」で表示する（A3 の論点を画面で確認できる）
-// 通信は core/api.js、汎用の描画ヘルパ（yen / escapeHtml / setApiBase）は ui/render.js を再利用する
+// 確定済み注文を一覧し、各明細を「注文時点の単価」で表示する
 
 import { API_BASE_URL } from "../core/config.js";
 import { fetchOrders } from "../core/api.js";

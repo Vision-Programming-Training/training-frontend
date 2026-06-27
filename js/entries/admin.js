@@ -1,6 +1,5 @@
 // 管理画面の組み立てと起動
-// 店舗ページ（shop.js）とは別の入口。商品マスタ（価格・在庫）を参照し、価格を変更する
-// 通信は core/api.js、汎用の描画ヘルパ（yen / escapeHtml / setApiBase）は ui/render.js を再利用する
+// 商品マスタ（価格・在庫）を参照し、価格を変更する
 
 import { API_BASE_URL } from "../core/config.js";
 import { fetchProducts, updateProductPrice } from "../core/api.js";

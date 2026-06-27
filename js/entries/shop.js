@@ -1,5 +1,4 @@
-// 全体の組み立てと起動
-// core/api（通信）・core/cart（状態）・ui/render（描画）を呼び分けて、1 本道のアプリにする
+// 店舗ページ（ホーム）の組み立てと起動
 // 「ボタンが押されたら何をするか」をここで決め、ui/render にハンドラとして渡す
 
 import { API_BASE_URL } from "../core/config.js";
