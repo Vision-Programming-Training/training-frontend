@@ -22,6 +22,31 @@ export async function fetchCoupons() {
   return res.json();
 }
 
+// 注文一覧を取得する（明細・商品名・注文時点の単価込み）
+export async function fetchOrders() {
+  const res = await fetch(`${API_BASE_URL}/api/orders`);
+  if (!res.ok) {
+    throw new Error(`注文履歴の取得に失敗しました (HTTP ${res.status})`);
+  }
+  return res.json();
+}
+
+// 商品の価格を変更する（管理者用。失敗時はサーバーが返したエラーメッセージを投げる）
+export async function updateProductPrice(productId, price) {
+  const res = await fetch(`${API_BASE_URL}/api/products/${productId}/price`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ price }),
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    const message = data && data.error ? data.error : `価格の変更に失敗しました (HTTP ${res.status})`;
+    throw new Error(message);
+  }
+  return data;
+}
+
 // 注文を作成する（失敗時はサーバーが返したエラーメッセージを投げる）
 export async function postOrder(items, couponCode) {
   const body = { items };

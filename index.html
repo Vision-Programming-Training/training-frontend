@@ -7,10 +7,16 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <h1>Vision 市場</h1>
-  <p class="muted">
-    接続先サーバー: <code id="api-base"></code>
-  </p>
+  <header class="topbar">
+    <a class="brand" href="index.html">🛒 Vision 市場</a>
+    <nav class="nav">
+      <a class="nav-link active" href="index.html" aria-current="page">店舗</a>
+      <a class="nav-link" href="orders.html">注文履歴</a>
+      <a class="nav-link" href="admin.html">管理</a>
+    </nav>
+  </header>
+
+  <h1>ショップ</h1>
 
   <div class="layout">
     <section>
@@ -41,6 +47,8 @@
     <h2>使えるクーポン</h2>
     <div id="coupons"><p class="empty">読み込み中...</p></div>
   </section>
+
+  <footer class="appfoot">接続先サーバー: <code id="api-base"></code></footer>
 
   <!-- ES モジュール（main.js が config / api / cart / ui を import するので、読み込むのは main.js だけ） -->
   <script type="module" src="js/main.js"></script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision 市場 — 注文履歴</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">🛒 Vision 市場</a>
+    <nav class="nav">
+      <a class="nav-link" href="index.html">店舗</a>
+      <a class="nav-link active" href="orders.html" aria-current="page">注文履歴</a>
+      <a class="nav-link" href="admin.html">管理</a>
+    </nav>
+  </header>
+
+  <h1>注文履歴</h1>
+
+  <section>
+    <h2>注文一覧</h2>
+    <div id="orders"><p class="empty">読み込み中...</p></div>
+  </section>
+
+  <footer class="appfoot">接続先サーバー: <code id="api-base"></code></footer>
+
+  <!-- ES モジュール（orders.js が config / api / ui を import する） -->
+  <script type="module" src="js/orders.js"></script>
+</body>
+</html>
