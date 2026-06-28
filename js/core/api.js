@@ -31,6 +31,20 @@ export async function fetchOrders() {
   return res.json();
 }
 
+// 注文をキャンセルする（在庫を戻し、ステータスを Cancelled にする。失敗時はサーバーが返したエラーメッセージを投げる）
+export async function cancelOrder(orderId) {
+  const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
+    method: "POST",
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    const message = data && data.error ? data.error : `注文のキャンセルに失敗しました (HTTP ${res.status})`;
+    throw new Error(message);
+  }
+  return data;
+}
+
 // 商品の価格を変更する（管理者用。失敗時はサーバーが返したエラーメッセージを投げる）
 export async function updateProductPrice(productId, price) {
   const res = await fetch(`${API_BASE_URL}/api/products/${productId}/price`, {

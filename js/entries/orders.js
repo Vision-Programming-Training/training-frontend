@@ -2,7 +2,7 @@
 // 確定済み注文を一覧し、各明細を「注文時点の単価」で表示する
 
 import { API_BASE_URL } from "../core/config.js";
-import { fetchOrders } from "../core/api.js";
+import { fetchOrders, cancelOrder } from "../core/api.js";
 import { yen, escapeHtml, setApiBase } from "../ui/render.js";
 
 // orders 固有の画面要素
@@ -63,6 +63,12 @@ function renderOrders(orders) {
       ? `<div class="muted">クーポン: <code>${escapeHtml(order.couponCode)}</code></div>`
       : "";
 
+    // 確定済みの注文だけキャンセルできる（キャンセル済みは再度キャンセルできない）
+    const cancelLine =
+      order.status === "Confirmed"
+        ? `<div class="order-actions"><button type="button" class="cancel-btn">注文をキャンセル</button></div>`
+        : "";
+
     card.innerHTML = `
       <div class="order-head">
         <div>
@@ -74,9 +80,32 @@ function renderOrders(orders) {
       ${renderItems(order.items)}
       ${couponLine}
       <div class="total">お支払い金額（税込）: ${yen(order.totalAmount)}</div>
+      ${cancelLine}
     `;
 
+    const cancelBtn = card.querySelector(".cancel-btn");
+    if (cancelBtn) {
+      cancelBtn.addEventListener("click", () => handleCancel(order.id, cancelBtn));
+    }
+
     ordersEl.appendChild(card);
+  }
+}
+
+// 「注文をキャンセル」ボタンの処理：サーバーにキャンセルを依頼し、一覧を取り直す
+async function handleCancel(orderId, button) {
+  if (!window.confirm(`注文 #${orderId} をキャンセルします。よろしいですか？`)) {
+    return;
+  }
+
+  button.disabled = true;
+  try {
+    await cancelOrder(orderId);
+    // 在庫やステータスは確定後の状態に依存するので、最新の注文一覧を取り直す
+    await loadOrders();
+  } catch (err) {
+    alert(err.message);
+    button.disabled = false;
   }
 }
 

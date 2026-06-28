@@ -12,3 +12,8 @@
 .order-items { width: 100%; border-collapse: collapse; font-size: .9rem; }
 .order-items th, .order-items td { padding: .3rem .4rem; border-bottom: 1px solid #eee; text-align: left; }
 .order-items .num { text-align: right; white-space: nowrap; }
+
+/* キャンセルボタン */
+.order-actions { margin-top: .6rem; text-align: right; }
+.cancel-btn { color: #b91c1c; border-color: #f0c5c5; }
+.cancel-btn:hover:not(:disabled) { background: #fdeaea; }
