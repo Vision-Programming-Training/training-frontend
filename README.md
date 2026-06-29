@@ -1,13 +1,24 @@
 # training-frontend
 
-新人研修用ミニ EC の **フロントエンド**。素の HTML + JavaScript（`fetch`）だけで作った、商品一覧 → カート → 注文の 1 本道の画面です。
+新人研修用ミニ EC「Vision 市場」の **フロントエンド**。素の HTML + JavaScript（`fetch`）だけで作っています。
 
-このフロントは **backend の言語に依存しません**。サーバーを C# 版・Java 版・Node 版などに入れ替えても、このフロントを 1 個使い回せます。接続先は `config.js` で切り替えます。
+- 店舗（商品一覧 → カート → 注文）
+- 注文履歴（一覧・キャンセル）
+- 管理（商品マスタ参照・価格変更）
+
+の 3 ページを、共通ヘッダーのタブで行き来します。
+
+このフロントは **backend の言語に依存しません**。<br>
+サーバーを C# 版・Java 版・Node 版などに入れ替えても、このフロントを 1 個使い回せます。<br>
+接続先は `config.js` で切り替えます。
+
 
 ## このフロントの狙い
 
-- `api.js` の中の `fetch("...")` の行こそが **クライアントとサーバーの境界**です。「画面（ブラウザ）」と「サーバー」が別物で、HTTP で通信していることがコードから見えるように、あえて素の構成にしています。
-- フレームワーク（React / Vue / Blazor など）は使いません。境界を隠さないためです。
+- `api.js` の中の `fetch("...")` の行こそが **クライアントとサーバーの境界**です<br>
+「画面（ブラウザ）」と「サーバー」が別物で、HTTP で通信していることがコードから見えるように、あえて素の構成にしています。
+
+- フレームワークやライブラリ（React / Vue など）は使いません。境界を隠さないためです。
 
 ## 必要なもの
 
@@ -41,10 +52,10 @@ python -m http.server 5500
 
 ```js
 // 例: C# 版（既定）
-const API_BASE_URL = "http://localhost:5000";
+export const API_BASE_URL = "http://localhost:5000";
 
 // 例: 別のサーバー版に切り替える場合
-// const API_BASE_URL = "http://localhost:8080";
+// export const API_BASE_URL = "http://localhost:8080";
 ```
 
 サーバーを別言語版に入れ替えても、フロントはこの URL を変えるだけで再利用できます。
@@ -60,11 +71,14 @@ training-frontend/
 ├── admin.html      管理画面（js/entries/admin.js）
 ├── README.md
 ├── css/
-│   └── styles.css  見た目（スタイル）
+│   ├── common.css  全ページ共通の見た目（topbar・カード・メッセージなど）
+│   ├── shop.css    店舗ページ固有のスタイル
+│   ├── orders.css  注文履歴ページ固有のスタイル
+│   └── admin.css   管理ページ固有のスタイル
 └── js/
     ├── entries/    各 HTML の入口（画面と 1 対 1。組み立てと起動・イベント結線）
     │   ├── shop.js     店舗（商品一覧・カート・注文）
-    │   ├── orders.js   注文履歴
+    │   ├── orders.js   注文履歴（一覧・キャンセル）
     │   └── admin.js    管理（商品マスタ参照・価格変更）
     ├── core/       DOM に依存しない土台
     │   ├── config.js   接続先サーバーのベース URL（ここだけ切り替える）
@@ -76,11 +90,17 @@ training-frontend/
             └── topbar.js  共通ヘッダーナビ（自分で <header> を差し込む）
 ```
 
-依存の向きは `entries/* → core/api・core/cart・ui/render → core/config` の一方通行です。`core/cart.js` と `ui/render.js` は互いを知らず、つなぎ役の `entries/*.js` がボタンの処理を「ハンドラ」として `ui/render.js` に渡します。これが**関心の分離**の形です。
+依存の向きは `entries/* → core/api・core/cart・ui/render → core/config` の一方通行です。<br>
+`core/cart.js` と `ui/render.js` は互いを知らず、つなぎ役の `entries/*.js` がボタンの処理を「ハンドラ」として `ui/render.js` に渡します。<br>
+
+これが**関心の分離**の形です。
 
 ## 使い方
 
 1. backend を起動する（`dotnet run --project src` など）。
 2. このフロントを簡易サーバーで開く。
-3. 商品一覧から「カートに追加」→ 必要ならクーポンコード（`WELCOME500` / `SALE10`）を入力 →「この内容で注文する」。
-4. 注文番号と税込金額が表示され、在庫が更新されます。
+3. **店舗**（`index.html`）で商品一覧から「カートに追加」→ 必要ならクーポンコード（`WELCOME500` / `SALE10`）を入力 →「この内容で注文する」。注文番号と税込金額が表示され、在庫が更新されます。
+4. **注文履歴**（`orders.html`）で過去の注文を一覧表示し、注文をキャンセルできます（在庫が戻ります）。
+5. **管理**（`admin.html`）で商品マスタを参照し、価格を変更できます。
+
+各ページは共通ヘッダーのタブで行き来できます。
