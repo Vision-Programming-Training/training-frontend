@@ -51,7 +51,8 @@ function renderProducts(products) {
     const button = document.createElement("button");
     button.className = "primary";
     button.textContent = "価格を更新";
-    button.addEventListener("click", () => savePrice(product, input.value, button));
+    const value = input.value;
+    button.addEventListener("click", () => savePrice(product, value, button));
 
     controls.appendChild(input);
     controls.appendChild(button);
