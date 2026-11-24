@@ -136,6 +136,6 @@ export function showMessage(text, type) {
   resultEl.innerHTML = "";
   const div = document.createElement("div");
   div.className = `message ${type}`;
-  div.textContent = text;
+  div.innerHTML = text;
   resultEl.appendChild(div);
 }
