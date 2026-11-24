@@ -64,7 +64,7 @@ function renderProducts(products) {
 
 // 1 商品の価格を更新する
 async function savePrice(product, rawValue, button) {
-  const price = Number(rawValue);
+  const price = rawValue;
   if (!Number.isFinite(price) || price < 0) {
     showMessage("価格は 0 以上の数値で入力してください。", "error");
     return;
