@@ -35,8 +35,7 @@ function renderItems(items) {
           <td class="num">× ${i.quantity}</td>
           <td class="num">${yen(i.lineTotal)}</td>
         </tr>`
-    )
-    .join("");
+    );
 
   return `
     <table class="order-items">
