@@ -37,7 +37,8 @@ export function renderProducts(products, onAdd) {
   }
 
   productsEl.innerHTML = "";
-  for (const product of products) {
+  for (var i = 0; i < products.length; i++) {
+    var product = products[i];
     const soldOut = product.stock <= 0;
     const card = document.createElement("div");
     card.className = "card product";
