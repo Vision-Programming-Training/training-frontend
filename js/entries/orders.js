@@ -83,7 +83,7 @@ function renderOrders(orders) {
       ${cancelLine}
     `;
 
-    const cancelBtn = card.querySelector(".cancel-btn");
+    const cancelBtn = document.querySelector(".cancel-btn");
     if (cancelBtn) {
       cancelBtn.addEventListener("click", () => handleCancel(order.id, cancelBtn));
     }
