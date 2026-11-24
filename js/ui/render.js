@@ -125,6 +125,7 @@ export function renderCart(items, subtotal, onRemove) {
     row.appendChild(right);
     cartEl.appendChild(row);
   }
+  cartEl.innerHTML += `<p class="muted">${items.length} 種類</p>`;
 
   // 税抜小計の目安（確定金額は税込・クーポン適用後でサーバーが計算して返す）
   cartTotalEl.textContent = `税抜小計（目安）: ${yen(subtotal)}`;
