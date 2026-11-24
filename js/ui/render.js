@@ -36,7 +36,6 @@ export function renderProducts(products, onAdd) {
     return;
   }
 
-  productsEl.innerHTML = "";
   for (const product of products) {
     const soldOut = product.stock <= 0;
     const card = document.createElement("div");
