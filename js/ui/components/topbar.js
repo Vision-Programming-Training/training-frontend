@@ -23,7 +23,7 @@ function mountTopbar() {
 
   const links = LINKS.map(({ href, label }) => {
     const isActive = href === here;
-    const cls = isActive ? "nav-link active" : "nav-link";
+    const cls = isActive ? "nav-link-active" : "nav-link";
     const aria = isActive ? ' aria-current="page"' : "";
     return `<a class="${cls}" href="${href}"${aria}>${label}</a>`;
   }).join("");
