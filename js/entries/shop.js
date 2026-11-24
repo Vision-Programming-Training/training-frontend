@@ -59,8 +59,6 @@ async function submitOrder() {
     quantity,
   }));
 
-  orderBtn.disabled = true;
-
   try {
     const order = await postOrder(items, couponEl.value.trim());
     // 1 本道なのでカートを空にして、最新の在庫を取り直す
