@@ -128,7 +128,6 @@ export function renderCart(items, subtotal, onRemove) {
 
   // 税抜小計の目安（確定金額は税込・クーポン適用後でサーバーが計算して返す）
   cartTotalEl.textContent = `税抜小計（目安）: ${yen(subtotal)}`;
-  checkoutEl.style.display = "block";
 }
 
 // 注文結果などのメッセージを表示する
