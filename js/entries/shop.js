@@ -62,7 +62,7 @@ async function submitOrder() {
   orderBtn.disabled = true;
 
   try {
-    const order = await postOrder(items, couponEl.value.trim());
+    const order = postOrder(items, couponEl.value.trim());
     // 1 本道なのでカートを空にして、最新の在庫を取り直す
     cart.clearCart();
     couponEl.value = "";
