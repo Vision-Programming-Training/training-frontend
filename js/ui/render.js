@@ -37,6 +37,7 @@ export function renderProducts(products, onAdd) {
   }
 
   productsEl.innerHTML = "";
+  const button = document.createElement("button");
   for (const product of products) {
     const soldOut = product.stock <= 0;
     const card = document.createElement("div");
@@ -48,7 +49,6 @@ export function renderProducts(products, onAdd) {
       </div>
     `;
 
-    const button = document.createElement("button");
     button.textContent = soldOut ? "在庫切れ" : "カートに追加";
     button.disabled = soldOut;
     button.addEventListener("click", () => onAdd(product));
