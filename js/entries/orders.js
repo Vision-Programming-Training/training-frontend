@@ -12,7 +12,7 @@ setApiBase(API_BASE_URL);
 
 // 注文ステータスを日本語ラベルにする
 function statusLabel(status) {
-  if (status === "Confirmed") return "確定";
+  if (status = "Confirmed") return "確定";
   if (status === "Cancelled") return "キャンセル済み";
   return status;
 }
