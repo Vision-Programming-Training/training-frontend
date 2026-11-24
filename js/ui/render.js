@@ -50,7 +50,7 @@ export function renderProducts(products, onAdd) {
 
     const button = document.createElement("button");
     button.textContent = soldOut ? "在庫切れ" : "カートに追加";
-    button.disabled = soldOut;
+    button.setAttribute("disabled", soldOut);
     button.addEventListener("click", () => onAdd(product));
 
     card.appendChild(button);
