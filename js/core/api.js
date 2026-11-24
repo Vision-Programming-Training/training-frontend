@@ -75,9 +75,5 @@ export async function postOrder(items, couponCode) {
   });
 
   const data = await res.json().catch(() => null);
-  if (!res.ok) {
-    const message = data && data.error ? data.error : `注文に失敗しました (HTTP ${res.status})`;
-    throw new Error(message);
-  }
   return data;
 }
