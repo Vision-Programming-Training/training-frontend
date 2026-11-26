@@ -24,6 +24,11 @@ function formatDate(iso) {
   return d.toLocaleString("ja-JP");
 }
 
+// 送料を表示用の文字列にする（0 円なら「無料」）
+function shippingFeeLabel(fee) {
+  return fee > 0 ? yen(fee) : "無料";
+}
+
 // 1 注文の明細表を組み立てる
 function renderItems(items) {
   const rows = items
@@ -63,6 +68,11 @@ function renderOrders(orders) {
       ? `<div class="muted">クーポン: <code>${escapeHtml(order.couponCode)}</code></div>`
       : "";
 
+    // 送料はサーバーが確定時に保存した値をそのまま表示する（ここで計算し直さない）
+    const shippingFeeLine = order.shippingFee != null
+      ? `<div class="muted">送料: ${shippingFeeLabel(order.shippingFee)}</div>`
+      : "";
+
     // 確定済みの注文だけキャンセルできる（キャンセル済みは再度キャンセルできない）
     const cancelLine =
       order.status === "Confirmed"
@@ -79,6 +89,7 @@ function renderOrders(orders) {
       </div>
       ${renderItems(order.items)}
       ${couponLine}
+      ${shippingFeeLine}
       <div class="total">お支払い金額（税込）: ${yen(order.totalAmount)}</div>
       ${cancelLine}
     `;
